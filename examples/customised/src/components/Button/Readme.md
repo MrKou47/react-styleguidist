@@ -1,14 +1,14 @@
 Basic button:
 
-```jsx
+```jsx { "props": { "className": "checks" } }
 <Button>Push Me</Button>
 ```
 
 Big pink button:
 
 ```jsx
-<Button size="large" color="deeppink">
-  Lick Me
+<Button size="small" color="deeppink">
+  watch Me
 </Button>
 ```
 

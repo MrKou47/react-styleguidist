@@ -23,7 +23,8 @@ class StateHolder extends Component {
 	setStateBinded = this.setState.bind(this);
 
 	render() {
-		return this.props.component(this.state, this.setStateBinded);
+		const comp = this.props.component(this.state, this.setStateBinded);
+		return comp;
 	}
 }
 

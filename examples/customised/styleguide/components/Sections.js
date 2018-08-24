@@ -5,6 +5,21 @@ import Heading from 'rsg-components/Heading';
 // Import default implementation from react-styleguidist using the full path
 import DefaultSections from 'react-styleguidist/lib/rsg-components/Sections/SectionsRenderer';
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+const initialState = {
+  initialState: {
+    theme: 'pangu',
+  }
+}
+
+const reducer = (state = initialState, action) => {
+  return state;
+}
+
+const store = createStore(reducer);
+
 const styles = ({ fontFamily, color, space }) => ({
 	headingSpacer: {
 		marginBottom: space[2],
@@ -17,13 +32,15 @@ const styles = ({ fontFamily, color, space }) => ({
 
 export function SectionsRenderer({ classes, children }) {
 	return (
-		<div>
-			<div className={classes.headingSpacer}>
-				<Heading level={1}>Example Components</Heading>
-				<p className={classes.descriptionText}>These are the greatest components</p>
+		<Provider store={store}>
+			<div>
+				<div className={classes.headingSpacer}>
+					<Heading level={1}>Example Components</Heading>
+					<p className={classes.descriptionText}>These are the greatest components</p>
+				</div>
+				<DefaultSections>{children}</DefaultSections>
 			</div>
-			<DefaultSections>{children}</DefaultSections>
-		</div>
+		</Provider>
 	);
 }
 

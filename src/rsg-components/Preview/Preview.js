@@ -7,8 +7,6 @@ import ReactExample from '../ReactExample';
 
 /* eslint-disable no-invalid-this */
 
-const Fragment = React.Fragment ? React.Fragment : 'div';
-
 export default class Preview extends Component {
 	static propTypes = {
 		code: PropTypes.string.isRequired,
@@ -20,6 +18,7 @@ export default class Preview extends Component {
 	};
 	state = {
 		error: null,
+		Com: null,
 	};
 
 	componentDidMount() {
@@ -33,9 +32,9 @@ export default class Preview extends Component {
 		this.executeCode();
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return this.state.error !== nextState.error || this.props.code !== nextProps.code;
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	return this.state.error !== nextState.error || this.props.code !== nextProps.code;
+	// }
 
 	componentDidUpdate(prevProps) {
 		if (this.props.code !== prevProps.code) {
@@ -53,7 +52,7 @@ export default class Preview extends Component {
 		}
 	}
 
-	executeCode() {
+	executeCode = () => {
 		this.setState({
 			error: null,
 		});
@@ -71,16 +70,19 @@ export default class Preview extends Component {
 				compilerConfig={this.context.config.compilerConfig}
 			/>
 		);
-
-		window.requestAnimationFrame(() => {
-			this.unmountPreview();
-			try {
-				ReactDOM.render(wrappedComponent, this.mountNode);
-			} catch (err) {
-				this.handleError(err);
-			}
+		this.setState({
+			Com: wrappedComponent,
 		});
-	}
+
+		// window.requestAnimationFrame(() => {
+		// 	this.unmountPreview();
+		// 	try {
+		// 		// ReactDOM.render(wrappedComponent, this.mountNode);
+		// 	} catch (err) {
+		// 		this.handleError(err);
+		// 	}
+		// });
+	};
 
 	handleError = err => {
 		this.unmountPreview();
@@ -93,12 +95,13 @@ export default class Preview extends Component {
 	};
 
 	render() {
-		const { error } = this.state;
+		const { error, Com } = this.state;
 		return (
-			<Fragment>
+			<div>
+				{Com}
 				<div ref={ref => (this.mountNode = ref)} />
 				{error && <PlaygroundError message={error} />}
-			</Fragment>
+			</div>
 		);
 	}
 }
