@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 class Wrapper extends Component {
   render() {
-    return React.cloneElement(this.props.children, { ...this.props });
+    return React.cloneElement(this.props.children, { theme: this.props.theme });
   }
 }
 

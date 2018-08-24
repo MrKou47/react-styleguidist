@@ -1,5 +1,12 @@
 Basic button:
 
+```jsx
+initialState = { count: 42 }
+;<Button onClick={() => setState({ count: state.count + 1 })}>
+  {state.count}
+</Button>
+```
+
 ```jsx { "props": { "className": "checks" } }
 <Button>Push Me</Button>
 ```

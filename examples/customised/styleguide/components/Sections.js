@@ -9,9 +9,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 const initialState = {
-  initialState: {
-    theme: 'pangu',
-  }
+	theme: 'pangu',
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,13 +31,10 @@ const styles = ({ fontFamily, color, space }) => ({
 export function SectionsRenderer({ classes, children }) {
 	return (
 		<Provider store={store}>
-			<div>
-				<div className={classes.headingSpacer}>
-					<Heading level={1}>Example Components</Heading>
-					<p className={classes.descriptionText}>These are the greatest components</p>
-				</div>
-				<DefaultSections>{children}</DefaultSections>
-			</div>
+				<DefaultSections>
+					{123123}
+					{children}
+				</DefaultSections>
 		</Provider>
 	);
 }

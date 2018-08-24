@@ -6,14 +6,14 @@ import s from './Button.css';
 /**
  * The only true button.
  */
-export default function Button({ color, size, children }) {
+export default function Button({ color, size, children, onClick }) {
 	const styles = {
 		color,
 		fontSize: Button.sizes[size],
 	};
 
 	return (
-		<button className={s.root} style={styles}>
+		<button className={s.root} style={styles} onClick={onClick}>
 			{children}
 		</button>
 	);
@@ -22,7 +22,8 @@ Button.propTypes = {
 	/**
 	 * Button label.
 	 */
-	children: PropTypes.string.isRequired,
+	children: PropTypes.any,
+	onClick: PropTypes.any,
 	color: PropTypes.string,
 	size: PropTypes.oneOf(['small', 'normal', 'large']),
 };

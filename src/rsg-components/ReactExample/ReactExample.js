@@ -17,6 +17,7 @@ class StateHolder extends Component {
 	static propTypes = {
 		component: PropTypes.func.isRequired,
 		initialState: PropTypes.object.isRequired,
+		children: PropTypes.any,
 	};
 
 	state = this.props.initialState;
@@ -24,7 +25,10 @@ class StateHolder extends Component {
 
 	render() {
 		const comp = this.props.component(this.state, this.setStateBinded);
-		return comp;
+		return React.cloneElement(comp, {
+			...this.props,
+			...(this.props.children ? this.props.children : {}),
+		});
 	}
 }
 
